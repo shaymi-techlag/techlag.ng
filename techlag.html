@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TechLag.ng – Nigeria's Refurbished Tech Marketplace</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --green: #00A651;
+    --green-dark: #007A3D;
+    --green-light: #E6F7EE;
+    --white-grey: #FFFFFF;
+    --off-white: #F7F6F2;
+    --text-dark: #1A1A1A;
+    --text-mid: #555550;
+    --text-light: #888884;
+    --border: #E8E6E0;
+    --accent: #00A651;
+    --naija-gold: #F4A623;
+  }
+  body { font-family: 'DM Sans', sans-serif; color: var(--text-dark); background: var(--white-grey); }
+  a { text-decoration: none; color: inherit; }
+
+  /* TOP BANNER */
+  .top-banner {
+    background: var(--green);
+    color: #fff;
+    text-align: center;
+    padding: 9px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  .top-banner span { font-weight: 700; }
+
+  /* NAVBAR */
+  nav {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    position: sticky; top: 0; z-index: 100;
+    padding: 0 24px;
+  }
+  .nav-inner {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; align-items: center; gap: 20px; height: 64px;
+  }
+  .logo {
+    font-family: 'Syne', sans-serif;
+    font-size: 22px; font-weight: 800;
+    color: var(--text-dark);
+    display: flex; align-items: center; gap: 6px;
+    white-space: nowrap;
+  }
+  .logo-dot { color: var(--green); }
+  .search-bar {
+    flex: 1;
+    display: flex; align-items: center;
+    background: var(--off-white);
+    border: 1.5px solid var(--border);
+    border-radius: 50px;
+    padding: 0 16px; gap: 8px;
+    height: 42px;
+    transition: border-color 0.2s;
+  }
+  .search-bar:focus-within { border-color: var(--green); }
+  .search-bar input {
+    flex: 1; border: none; background: transparent;
+    font-size: 14px; outline: none; font-family: 'DM Sans', sans-serif;
+    color: var(--text-dark);
+  }
+  .search-icon { color: var(--text-light); font-size: 16px; }
+  .nav-links { display: flex; gap: 4px; align-items: center; }
+  .nav-btn {
+    padding: 8px 14px; border-radius: 50px; font-size: 13px;
+    font-weight: 500; cursor: pointer; border: 1.5px solid transparent;
+    transition: all 0.18s; white-space: nowrap;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .nav-btn:hover { background: var(--off-white); }
+  .nav-btn-outline { border-color: var(--border); }
+  .nav-btn-green {
+    background: var(--green); color: #fff;
+    border-color: var(--green);
+  }
+  .nav-btn-green:hover { background: var(--green-dark); border-color: var(--green-dark); }
+  .cart-btn {
+    width: 40px; height: 40px;
+    border-radius: 50%; border: 1.5px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    cursor: pointer; position: relative; font-size: 17px;
+    transition: all 0.18s;
+  }
+  .cart-btn:hover { background: var(--off-white); }
+  .cart-badge {
+    position: absolute; top: -4px; right: -4px;
+    background: var(--green); color: #fff;
+    font-size: 10px; font-weight: 700;
+    width: 17px; height: 17px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+  }
+
+  /* CATEGORY NAV */
+  .cat-nav {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 0 24px;
+  }
+  .cat-nav-inner {
+    max-width: 1280px; margin: 0 auto;
+    display: flex; gap: 0; overflow-x: auto; scrollbar-width: none;
+  }
+  .cat-nav-inner::-webkit-scrollbar { display: none; }
+  .cat-item {
+    padding: 12px 16px; font-size: 13px; font-weight: 500;
+    color: var(--text-mid); border-bottom: 2px solid transparent;
+    cursor: pointer; white-space: nowrap; transition: all 0.18s;
+  }
+  .cat-item:hover, .cat-item.active {
+    color: var(--green); border-bottom-color: var(--green);
+  }
+
+  /* HERO */
+  .hero {
+    background: var(--text-dark);
+    min-height: 480px;
+    display: flex; align-items: center;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg-pattern {
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(circle at 20% 50%, rgba(0,166,81,0.15) 0%, transparent 60%),
+      radial-gradient(circle at 80% 20%, rgba(244,166,35,0.08) 0%, transparent 50%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image: linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+  .hero-inner {
+    max-width: 1280px; margin: 0 auto; padding: 60px 24px;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 60px;
+    align-items: center; position: relative; z-index: 1; width: 100%;
+  }
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(0,166,81,0.15); color: var(--green);
+    border: 1px solid rgba(0,166,81,0.3);
+    padding: 5px 12px; border-radius: 50px; font-size: 12px; font-weight: 600;
+    margin-bottom: 20px; letter-spacing: 0.05em; text-transform: uppercase;
+  }
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(36px, 5vw, 58px);
+    font-weight: 800; color: #fff;
+    line-height: 1.05; margin-bottom: 20px;
+    letter-spacing: -0.02em;
+  }
+  .hero h1 .highlight { color: var(--green); }
+  .hero p {
+    color: rgba(255,255,255,0.65); font-size: 16px; line-height: 1.6;
+    margin-bottom: 32px; max-width: 460px;
+  }
+  .hero-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--green); color: #fff;
+    padding: 14px 28px; border-radius: 50px; font-size: 15px; font-weight: 600;
+    cursor: pointer; border: none; font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s; display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-primary:hover { background: var(--green-dark); transform: translateY(-1px); }
+  .btn-secondary {
+    background: transparent; color: #fff;
+    padding: 13px 28px; border-radius: 50px; font-size: 15px; font-weight: 500;
+    cursor: pointer; border: 1.5px solid rgba(255,255,255,0.25);
+    font-family: 'DM Sans', sans-serif; transition: all 0.2s;
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .btn-secondary:hover { border-color: rgba(255,255,255,0.6); }
+  .hero-stats {
+    display: flex; gap: 32px; margin-top: 40px; padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .stat-item .stat-num {
+    font-family: 'Syne', sans-serif; font-size: 24px; font-weight: 800; color: #fff;
+  }
+  .stat-item .stat-label { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+  .hero-visual {
+    display: flex; align-items: center; justify-content: center;
+  }
+  .hero-phone-mockup {
+    position: relative; width: 280px;
+  }
+  .phone-card {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 24px; padding: 24px;
+    backdrop-filter: blur(10px);
+  }
+  .phone-img-area {
+    background: rgba(255,255,255,0.08);
+    border-radius: 16px; height: 180px;
+    display: flex; align-items: center; justify-content: center;
+    margin-bottom: 16px; font-size: 64px; position: relative;
+  }
+  .phone-badge {
+    position: absolute; top: 12px; right: 12px;
+    background: var(--green); color: #fff;
+    font-size: 11px; font-weight: 700;
+    padding: 3px 10px; border-radius: 50px;
+  }
+  .phone-name {
+    font-size: 15px; font-weight: 600; color: #fff; margin-bottom: 4px;
+  }
+  .phone-condition {
+    font-size: 12px; color: rgba(255,255,255,0.5); margin-bottom: 12px;
+  }
+  .phone-price-row { display: flex; align-items: center; justify-content: space-between; }
+  .phone-price { font-family: 'Syne', sans-serif; font-size: 20px; font-weight: 800; color: var(--green); }
+  .phone-old-price { font-size: 12px; color: rgba(255,255,255,0.35); text-decoration: line-through; }
+  .add-btn {
+    background: var(--green); color: #fff; border: none;
+    width: 34px; height: 34px; border-radius: 50%;
+    font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  }
+  .floating-tag {
+    position: absolute; background: #fff; border-radius: 12px;
+    padding: 8px 14px; box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    font-size: 12px; font-weight: 600; color: var(--text-dark);
+    display: flex; align-items: center; gap: 6px;
+    animation: float 3s ease-in-out infinite;
+  }
+  .floating-tag.left { left: -40px; top: 80px; animation-delay: 0.5s; }
+  .floating-tag.right { right: -30px; bottom: 60px; }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  /* TRUST STRIP */
+  .trust-strip {
+    background: var(--green-light);
+    border-bottom: 1px solid rgba(0,166,81,0.12);
+    padding: 20px 24px;
+  }
+  .trust-inner {
+    max-width: 1280px; margin: 0 auto;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;
+  }
+  .trust-item {
+    display: flex; align-items: center; gap: 12px;
+  }
+  .trust-icon {
+    width: 40px; height: 40px; border-radius: 12px;
+    background: var(--green); color: #fff;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; flex-shrink: 0;
+  }
+  .trust-text .t1 { font-size: 13px; font-weight: 600; color: var(--text-dark); }
+  .trust-text .t2 { font-size: 11px; color: var(--text-mid); margin-top: 1px; }
+
+  /* SECTION COMMON */
+  section { padding: 64px 24px; }
+  .section-inner { max-width: 1280px; margin: 0 auto; }
+  .section-head {
+    display: flex; justify-content: space-between; align-items: flex-end;
+    margin-bottom: 32px;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px; font-weight: 800; letter-spacing: -0.02em;
+  }
+  .section-sub { font-size: 14px; color: var(--text-light); margin-top: 4px; }
+  .see-all {
+    font-size: 13px; font-weight: 600; color: var(--green);
+    display: flex; align-items: center; gap: 4px; cursor: pointer;
+  }
+  .see-all:hover { color: var(--green-dark); }
+
+  /* PRODUCT GRID */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+  }
+  .product-card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 16px; overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+    cursor: pointer;
+  }
+  .product-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.1);
+  }
+  .card-img {
+    background: var(--off-white);
+    height: 200px; display: flex; align-items: center;
+    justify-content: center; font-size: 72px; position: relative;
+  }
+  .card-badges {
+    position: absolute; top: 12px; left: 12px;
+    display: flex; flex-direction: column; gap: 4px;
+  }
+  .badge {
+    font-size: 10px; font-weight: 700; padding: 3px 8px;
+    border-radius: 50px; text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .badge-green { background: var(--green); color: #fff; }
+  .badge-gold { background: var(--naija-gold); color: #fff; }
+  .badge-dark { background: var(--text-dark); color: #fff; }
+  .wishlist-btn {
+    position: absolute; top: 12px; right: 12px;
+    width: 32px; height: 32px; border-radius: 50%;
+    background: #fff; border: 1px solid var(--border);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; cursor: pointer; transition: all 0.2s;
+  }
+  .wishlist-btn:hover { background: var(--off-white); transform: scale(1.1); }
+  .card-body { padding: 16px; }
+  .card-brand { font-size: 11px; font-weight: 600; color: var(--text-light); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+  .card-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; line-height: 1.3; }
+  .card-condition {
+    font-size: 11px; color: var(--green); font-weight: 600;
+    background: var(--green-light); padding: 2px 8px; border-radius: 50px;
+    display: inline-block; margin-bottom: 10px;
+  }
+  .card-stars { font-size: 12px; color: var(--naija-gold); margin-bottom: 10px; }
+  .card-stars span { color: var(--text-light); margin-left: 4px; }
+  .card-price-row { display: flex; align-items: center; justify-content: space-between; }
+  .card-price { font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800; }
+  .card-old { font-size: 11px; color: var(--text-light); text-decoration: line-through; margin-left: 4px; }
+  .card-discount { font-size: 11px; color: var(--green); font-weight: 700; margin-left: 4px; }
+  .card-add {
+    width: 32px; height: 32px; border-radius: 50%;
+    background: var(--green); color: #fff; border: none;
+    font-size: 18px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .card-add:hover { background: var(--green-dark); transform: scale(1.1); }
+
+  /* CATEGORIES GRID */
+  .cat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 16px;
+  }
+  .cat-card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px 16px;
+    text-align: center; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .cat-card:hover {
+    border-color: var(--green);
+    background: var(--green-light);
+    transform: translateY(-3px);
+  }
+  .cat-icon { font-size: 36px; margin-bottom: 10px; display: block; }
+  .cat-name { font-size: 13px; font-weight: 600; }
+  .cat-count { font-size: 11px; color: var(--text-light); margin-top: 3px; }
+
+  /* PROMO BANNER */
+  .promo-grid {
+    display: grid; grid-template-columns: 2fr 1fr; gap: 20px;
+  }
+  .promo-card {
+    border-radius: 20px; padding: 40px; overflow: hidden;
+    position: relative; min-height: 220px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    cursor: pointer;
+  }
+  .promo-card.dark { background: var(--text-dark); }
+  .promo-card.green { background: var(--green); }
+  .promo-card-tag {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.08em; margin-bottom: 8px;
+    opacity: 0.7; color: #fff;
+  }
+  .promo-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 24px; font-weight: 800; color: #fff;
+    line-height: 1.1; margin-bottom: 12px;
+  }
+  .promo-btn {
+    background: #fff; color: var(--text-dark);
+    padding: 10px 22px; border-radius: 50px;
+    font-size: 13px; font-weight: 700;
+    display: inline-block; cursor: pointer;
+    transition: opacity 0.2s;
+  }
+  .promo-btn:hover { opacity: 0.9; }
+  .promo-emoji {
+    position: absolute; right: 32px; top: 50%;
+    transform: translateY(-50%);
+    font-size: 80px; opacity: 0.8;
+  }
+
+  /* HOW IT WORKS */
+  .how-section { background: var(--off-white); }
+  .steps-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px;
+    margin-top: 40px;
+  }
+  .step-card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 16px; padding: 28px 20px; text-align: center;
+  }
+  .step-num {
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--green); color: #fff;
+    font-family: 'Syne', sans-serif; font-size: 18px; font-weight: 800;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+  }
+  .step-icon { font-size: 32px; margin-bottom: 12px; display: block; }
+  .step-title { font-size: 14px; font-weight: 700; margin-bottom: 8px; }
+  .step-text { font-size: 13px; color: var(--text-mid); line-height: 1.5; }
+
+  /* TESTIMONIALS */
+  .review-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  }
+  .review-card {
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px;
+  }
+  .review-stars { font-size: 14px; color: var(--naija-gold); margin-bottom: 12px; }
+  .review-text { font-size: 14px; line-height: 1.6; color: var(--text-mid); margin-bottom: 16px; font-style: italic; }
+  .review-user { display: flex; align-items: center; gap: 10px; }
+  .review-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 14px; font-weight: 700; color: #fff; flex-shrink: 0;
+  }
+  .review-name { font-size: 13px; font-weight: 600; }
+  .review-city { font-size: 11px; color: var(--text-light); }
+
+  /* BRANDS */
+  .brands-row {
+    display: flex; gap: 20px; overflow-x: auto;
+    scrollbar-width: none; padding-bottom: 4px;
+  }
+  .brands-row::-webkit-scrollbar { display: none; }
+  .brand-chip {
+    flex-shrink: 0; padding: 12px 24px;
+    background: #fff; border: 1px solid var(--border);
+    border-radius: 50px; font-size: 13px; font-weight: 600;
+    cursor: pointer; transition: all 0.2s; display: flex; align-items: center; gap: 8px;
+  }
+  .brand-chip:hover { border-color: var(--green); color: var(--green); }
+
+  /* NEWSLETTER */
+  .newsletter-section {
+    background: var(--text-dark); padding: 64px 24px;
+  }
+  .newsletter-inner {
+    max-width: 600px; margin: 0 auto; text-align: center;
+  }
+  .newsletter-inner h2 {
+    font-family: 'Syne', sans-serif;
+    font-size: 32px; font-weight: 800; color: #fff; margin-bottom: 12px;
+  }
+  .newsletter-inner p { color: rgba(255,255,255,0.55); margin-bottom: 24px; font-size: 15px; }
+  .newsletter-form { display: flex; gap: 10px; }
+  .newsletter-input {
+    flex: 1; padding: 14px 20px; border-radius: 50px;
+    border: 1.5px solid rgba(255,255,255,0.1);
+    background: rgba(255,255,255,0.06);
+    color: #fff; font-size: 14px; font-family: 'DM Sans', sans-serif;
+    outline: none; transition: border-color 0.2s;
+  }
+  .newsletter-input::placeholder { color: rgba(255,255,255,0.3); }
+  .newsletter-input:focus { border-color: var(--green); }
+
+  /* FOOTER */
+  footer {
+    background: #0D0D0D; color: rgba(255,255,255,0.6);
+    padding: 56px 24px 32px;
+  }
+  .footer-grid {
+    max-width: 1280px; margin: 0 auto;
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px;
+    margin-bottom: 48px;
+  }
+  .footer-brand .logo { margin-bottom: 16px; }
+  .footer-brand p { font-size: 13px; line-height: 1.6; max-width: 280px; }
+  .footer-socials { display: flex; gap: 10px; margin-top: 20px; }
+  .social-btn {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 15px; cursor: pointer; transition: all 0.2s;
+  }
+  .social-btn:hover { background: var(--green); }
+  .footer-col h4 {
+    font-size: 13px; font-weight: 700; color: #fff;
+    margin-bottom: 16px; letter-spacing: 0.04em; text-transform: uppercase;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 10px; }
+  .footer-col ul li a { font-size: 13px; transition: color 0.2s; }
+  .footer-col ul li a:hover { color: var(--green); }
+  .footer-bottom {
+    max-width: 1280px; margin: 0 auto;
+    border-top: 1px solid rgba(255,255,255,0.07);
+    padding-top: 24px;
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 12px; flex-wrap: wrap; gap: 12px;
+  }
+  .footer-payments { display: flex; gap: 8px; }
+  .payment-badge {
+    background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.7);
+    padding: 4px 10px; border-radius: 6px; font-size: 11px; font-weight: 600;
+  }
+
+  /* MISC */
+  .green-text { color: var(--green); }
+  .naira { font-family: 'DM Sans', sans-serif; }
+
+  /* RESPONSIVE */
+  @media (max-width: 900px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-visual { display: none; }
+    .trust-inner { grid-template-columns: repeat(2, 1fr); }
+    .promo-grid { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: repeat(2, 1fr); }
+    .review-grid { grid-template-columns: 1fr 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 600px) {
+    .nav-links { display: none; }
+    .trust-inner { grid-template-columns: 1fr 1fr; }
+    .steps-grid { grid-template-columns: 1fr 1fr; }
+    .review-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .newsletter-form { flex-direction: column; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOP BANNER -->
+<div class="top-banner">
+  🎉 <span>Free delivery</span> to Lagos, Abuja & Port Harcourt on orders above ₦150,000 &nbsp;|&nbsp; 🔒 12-month warranty on all devices
+</div>
+
+<!-- NAVBAR -->
+<nav>
+  <div class="nav-inner">
+    <div class="logo">Tech<span class="logo-dot">Lag</span><span style="font-size:13px;font-weight:400;color:var(--text-light);margin-left:2px;">.ng</span></div>
+    <div class="search-bar">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="Search iPhones, Samsung, Laptops...">
+    </div>
+    <div class="nav-links">
+      <a href="#" class="nav-btn nav-btn-outline">Sell my device</a>
+      <a href="#" class="nav-btn">Sign in</a>
+      <a href="#" class="nav-btn nav-btn-green">Sign up</a>
+    </div>
+    <div class="cart-btn">
+      🛒
+      <div class="cart-badge">3</div>
+    </div>
+  </div>
+</nav>
+
+<!-- CATEGORY NAV -->
+<div class="cat-nav">
+  <div class="cat-nav-inner">
+    <div class="cat-item active">All</div>
+    <div class="cat-item">📱 Smartphones</div>
+    <div class="cat-item">💻 Laptops</div>
+    <div class="cat-item">⌚ Smart Watches</div>
+    <div class="cat-item">🎧 Earphones & Audio</div>
+    <div class="cat-item">📸 Cameras</div>
+    <div class="cat-item">🖨️ Printers</div>
+    <div class="cat-item">🎮 Gaming</div>
+    <div class="cat-item">📺 TVs & Screens</div>
+    <div class="cat-item">🔋 Accessories</div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg-pattern"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div>
+      <div class="hero-tag">🇳🇬 Nigeria's #1 Refurbished Tech Marketplace</div>
+      <h1>Quality Tech.<br><span class="highlight">Better Prices.</span><br>No Wahala.</h1>
+      <p>Buy certified refurbished smartphones, laptops, and gadgets at up to 70% off. Every device tested, warranted, and delivered to your doorstep across Nigeria.</p>
+      <div class="hero-actions">
+        <button class="btn-primary">Shop Now →</button>
+        <button class="btn-secondary">Our Promise</button>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-item">
+          <div class="stat-num">50,000+</div>
+          <div class="stat-label">Happy customers</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">12 months</div>
+          <div class="stat-label">Warranty on all items</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-num">36 states</div>
+          <div class="stat-label">Nationwide delivery</div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-phone-mockup">
+        <div class="floating-tag left">✅ Certified Refurbished</div>
+        <div class="phone-card">
+          <div class="phone-img-area">
+            📱
+            <div class="phone-badge">Very Good</div>
+          </div>
+          <div class="phone-name">iPhone 13 Pro Max</div>
+          <div class="phone-condition">256GB · Midnight · Excellent condition</div>
+          <div class="phone-price-row">
+            <div>
+              <div class="phone-price">₦420,000</div>
+              <div class="phone-old-price">₦750,000 new</div>
+            </div>
+            <button class="add-btn">+</button>
+          </div>
+        </div>
+        <div class="floating-tag right">🚚 Lagos delivery: 24hrs</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-inner">
+    <div class="trust-item">
+      <div class="trust-icon">✅</div>
+      <div class="trust-text">
+        <div class="t1">30-Day Money Back</div>
+        <div class="t2">No questions asked return policy</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">🔧</div>
+      <div class="trust-text">
+        <div class="t1">12-Month Warranty</div>
+        <div class="t2">All devices fully covered</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">🚚</div>
+      <div class="trust-text">
+        <div class="t1">Nationwide Delivery</div>
+        <div class="t2">All 36 states + FCT Abuja</div>
+      </div>
+    </div>
+    <div class="trust-item">
+      <div class="trust-icon">🔒</div>
+      <div class="trust-text">
+        <div class="t1">Secure Payment</div>
+        <div class="t2">Paystack, Flutterwave, Bank transfer</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DEALS OF THE DAY -->
+<section style="background: #fff;">
+  <div class="section-inner">
+    <div class="section-head">
+      <div>
+        <div class="section-title">🔥 Deals of the Day</div>
+        <div class="section-sub">Fresh discounts refreshed every 24 hours — grab them before they go!</div>
+      </div>
+      <div class="see-all">See all deals →</div>
+    </div>
+    <div class="product-grid" id="product-grid">
+
+      <div class="product-card">
+        <div class="card-img">📱
+          <div class="card-badges">
+            <span class="badge badge-green">Very Good</span>
+            <span class="badge badge-gold">-44%</span>
+          </div>
+          <div class="wishlist-btn">♡</div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Apple</div>
+          <div class="card-name">iPhone 14 Plus 128GB</div>
+          <div class="card-condition">✦ Very Good Condition</div>
+          <div class="card-stars">★★★★★ <span>(842 reviews)</span></div>
+          <div class="card-price-row">
+            <div>
+              <span class="card-price naira">₦380,000</span>
+              <span class="card-old naira">₦680,000</span>
+            </div>
+            <button class="card-add">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="card-img">🖥️
+          <div class="card-badges">
+            <span class="badge badge-dark">Like New</span>
+            <span class="badge badge-gold">-38%</span>
+          </div>
+          <div class="wishlist-btn">♡</div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Samsung</div>
+          <div class="card-name">Galaxy S23 Ultra 256GB</div>
+          <div class="card-condition">✦ Like New</div>
+          <div class="card-stars">★★★★☆ <span>(523 reviews)</span></div>
+          <div class="card-price-row">
+            <div>
+              <span class="card-price naira">₦430,000</span>
+              <span class="card-old naira">₦695,000</span>
+            </div>
+            <button class="card-add">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="card-img">💻
+          <div class="card-badges">
+            <span class="badge badge-green">Good</span>
+            <span class="badge badge-gold">-55%</span>
+          </div>
+          <div class="wishlist-btn">♡</div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Apple</div>
+          <div class="card-name">MacBook Air M1 256GB</div>
+          <div class="card-condition">✦ Good Condition</div>
+          <div class="card-stars">★★★★★ <span>(1,204 reviews)</span></div>
+          <div class="card-price-row">
+            <div>
+              <span class="card-price naira">₦560,000</span>
+              <span class="card-old naira">₦1,240,000</span>
+            </div>
+            <button class="card-add">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="card-img">⌚
+          <div class="card-badges">
+            <span class="badge badge-green">Very Good</span>
+            <span class="badge badge-gold">-40%</span>
+          </div>
+          <div class="wishlist-btn">♡</div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Apple</div>
+          <div class="card-name">Apple Watch Series 8 GPS</div>
+          <div class="card-condition">✦ Very Good Condition</div>
+          <div class="card-stars">★★★★★ <span>(389 reviews)</span></div>
+          <div class="card-price-row">
+            <div>
+              <span class="card-price naira">₦195,000</span>
+              <span class="card-old naira">₦325,000</span>
+            </div>
+            <button class="card-add">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="card-img">🎧
+          <div class="card-badges">
+            <span class="badge badge-dark">Like New</span>
+            <span class="badge badge-gold">-35%</span>
+          </div>
+          <div class="wishlist-btn">♡</div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Sony</div>
+          <div class="card-name">WH-1000XM5 Headphones</div>
+          <div class="card-condition">✦ Like New</div>
+          <div class="card-stars">★★★★★ <span>(276 reviews)</span></div>
+          <div class="card-price-row">
+            <div>
+              <span class="card-price naira">₦152,000</span>
+              <span class="card-old naira">₦235,000</span>
+            </div>
+            <button class="card-add">+</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="card-img">📱
+          <div class="card-badges">
+            <span class="badge badge-green">Good</span>
+            <span class="badge badge-gold">-50%</span>
+          </div>
+          <div class="wishlist-btn">♡</div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">Google</div>
+          <div class="card-name">Pixel 7 Pro 128GB</div>
+          <div class="card-condition">✦ Good Condition</div>
+          <div class="card-stars">★★★★☆ <span>(198 reviews)</span></div>
+          <div class="card-price-row">
+            <div>
+              <span class="card-price naira">₦210,000</span>
+              <span class="card-old naira">₦420,000</span>
+            </div>
+            <button class="card-add">+</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROMO BANNERS -->
+<section style="background: var(--off-white);">
+  <div class="section-inner">
+    <div class="promo-grid">
+      <div class="promo-card dark">
+        <div class="promo-emoji">💻</div>
+        <div class="promo-card-tag">Limited time offer</div>
+        <h3>Laptops from<br>₦180,000</h3>
+        <a href="#" class="promo-btn">Shop Laptops →</a>
+      </div>
+      <div class="promo-card green">
+        <div class="promo-emoji">📱</div>
+        <div class="promo-card-tag">Best sellers</div>
+        <h3>Phones<br>under ₦250k</h3>
+        <a href="#" class="promo-btn">Explore →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOP BY CATEGORY -->
+<section style="background: #fff;">
+  <div class="section-inner">
+    <div class="section-head">
+      <div>
+        <div class="section-title">Shop by Category</div>
+        <div class="section-sub">Find what you need, fast</div>
+      </div>
+    </div>
+    <div class="cat-grid" id="cat-grid"></div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<section style="background: var(--off-white);">
+  <div class="section-inner">
+    <div class="section-head">
+      <div>
+        <div class="section-title">Shop by Brand</div>
+        <div class="section-sub">All your favourite brands, refurbished</div>
+      </div>
+    </div>
+    <div class="brands-row">
+      <div class="brand-chip">🍎 Apple</div>
+      <div class="brand-chip">📱 Samsung</div>
+      <div class="brand-chip">💡 Google</div>
+      <div class="brand-chip">🖥️ HP</div>
+      <div class="brand-chip">💻 Dell</div>
+      <div class="brand-chip">🖱️ Lenovo</div>
+      <div class="brand-chip">🎵 Sony</div>
+      <div class="brand-chip">🔊 JBL</div>
+      <div class="brand-chip">🎧 Bose</div>
+      <div class="brand-chip">📸 Canon</div>
+      <div class="brand-chip">📷 Nikon</div>
+      <div class="brand-chip">🖨️ Epson</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how-section">
+  <div class="section-inner">
+    <div style="text-align:center;margin-bottom:8px;">
+      <div class="section-title">How TechLag.ng Works</div>
+      <p style="color:var(--text-mid);font-size:15px;margin-top:8px;">Simple, transparent, and stress-free</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-num">1</div>
+        <span class="step-icon">🔍</span>
+        <div class="step-title">Browse & Choose</div>
+        <div class="step-text">Search from 5,000+ certified refurbished devices. Filter by brand, condition, and price.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">2</div>
+        <span class="step-icon">✅</span>
+        <div class="step-title">Certified Quality</div>
+        <div class="step-text">Every device passes our 25-point quality check by certified Nigerian technicians.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">3</div>
+        <span class="step-icon">💳</span>
+        <div class="step-title">Pay Safely in ₦</div>
+        <div class="step-text">Pay with Paystack, Flutterwave, bank transfer, or USSD. Your money is protected.</div>
+      </div>
+      <div class="step-card">
+        <div class="step-num">4</div>
+        <span class="step-icon">🚚</span>
+        <div class="step-title">Delivered to You</div>
+        <div class="step-text">Same-day delivery in Lagos. 1-3 days to Abuja, Port Harcourt & all other states.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVIEWS -->
+<section style="background: #fff;">
+  <div class="section-inner">
+    <div class="section-head">
+      <div>
+        <div class="section-title">What Nigerians Are Saying</div>
+        <div class="section-sub">4.8/5 from over 12,000 verified reviews</div>
+      </div>
+      <div class="see-all">Read all reviews →</div>
+    </div>
+    <div class="review-grid" id="review-grid"></div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div class="newsletter-section">
+  <div class="newsletter-inner">
+    <h2>Get the best deals first 🔔</h2>
+    <p>Join 80,000+ Nigerians getting exclusive deals, new arrivals & tech tips every week. No spam, we promise.</p>
+    <div class="newsletter-form">
+      <input type="email" class="newsletter-input" placeholder="Enter your email address">
+      <button class="btn-primary" style="white-space:nowrap;">Subscribe →</button>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div class="logo" style="color:#fff;">Tech<span class="logo-dot">Lag</span><span style="font-size:13px;font-weight:400;color:rgba(255,255,255,0.4);margin-left:2px;">.ng</span></div>
+      <p>Nigeria's most trusted marketplace for certified refurbished electronics. Quality tech at prices that make sense — for you and the planet.</p>
+      <div class="footer-socials">
+        <div class="social-btn">𝕏</div>
+        <div class="social-btn">f</div>
+        <div class="social-btn">in</div>
+        <div class="social-btn">📸</div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul>
+        <li><a href="#">Smartphones</a></li>
+        <li><a href="#">Laptops</a></li>
+        <li><a href="#">Smartwatches</a></li>
+        <li><a href="#">Audio</a></li>
+        <li><a href="#">Cameras</a></li>
+        <li><a href="#">Gaming</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">Track my order</a></li>
+        <li><a href="#">Returns & refunds</a></li>
+        <li><a href="#">Warranty claims</a></li>
+        <li><a href="#">FAQs</a></li>
+        <li><a href="#">Contact us</a></li>
+        <li><a href="#">WhatsApp support</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">About us</a></li>
+        <li><a href="#">Our quality promise</a></li>
+        <li><a href="#">Become a seller</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Privacy policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>© 2025 TechLag.ng Ltd. RC No. 1234567. Registered in Nigeria.</div>
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap;">
+      <span>We accept:</span>
+      <div class="footer-payments">
+        <span class="payment-badge">Paystack</span>
+        <span class="payment-badge">Flutterwave</span>
+        <span class="payment-badge">Bank Transfer</span>
+        <span class="payment-badge">USSD</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+
+  /* ============================================================
+     ✏️  TECHLAG.NG — EASY EDIT ZONE
+     Edit the objects below to update your site content.
+     No coding knowledge needed — just change the values!
+     ============================================================ */
+
+  // ── 0. SUPABASE CONFIG ────────────────────────────────────────
+  // Paste your Supabase Project URL and anon key here.
+  // OR leave blank — the site will read credentials saved by
+  // the admin dashboard automatically.
+  const SUPABASE_URL = '';   // e.g. 'https://abc.supabase.co'
+  const SUPABASE_KEY = '';   // e.g. 'eyJhbGci...'
+
+  // ── 1. SITE SETTINGS ─────────────────────────────────────────
+  const SITE = {
+    name: "TechLag",
+    tld: ".ng",
+    tagline: "Quality Tech. Better Prices. No Wahala.",
+    bannerText: "🎉 Free delivery to Lagos, Abuja & Port Harcourt on orders above ₦150,000 | 🔒 12-month warranty on all devices",
+    currency: "₦",
+    whatsapp: "+234 800 000 0000",  // your WhatsApp support number
+    email: "hello@techlag.ng",
+  };
+
+  // ── 2. FALLBACK PRODUCTS ──────────────────────────────────────
+  // Shown only if Supabase is not connected or unreachable.
+  const FALLBACK_PRODUCTS = [
+    { emoji:"📱", brand:"Apple",   name:"iPhone 14 Plus 128GB",    badge:"Very Good", discount:"-44%", price:380000, old_price:680000, rating:5, reviews:842,  category:"smartphones" },
+    { emoji:"🖥️", brand:"Samsung", name:"Galaxy S23 Ultra 256GB",  badge:"Like New",  discount:"-38%", price:430000, old_price:695000, rating:4, reviews:523,  category:"smartphones" },
+    { emoji:"💻", brand:"Apple",   name:"MacBook Air M1 256GB",    badge:"Good",      discount:"-55%", price:560000, old_price:1240000,rating:5, reviews:1204, category:"laptops"     },
+    { emoji:"⌚", brand:"Apple",   name:"Apple Watch Series 8 GPS",badge:"Very Good", discount:"-40%", price:195000, old_price:325000, rating:5, reviews:389,  category:"smartwatches"},
+    { emoji:"🎧", brand:"Sony",    name:"WH-1000XM5 Headphones",   badge:"Like New",  discount:"-35%", price:152000, old_price:235000, rating:5, reviews:276,  category:"audio"       },
+    { emoji:"📱", brand:"Google",  name:"Pixel 7 Pro 128GB",       badge:"Good",      discount:"-50%", price:210000, old_price:420000, rating:4, reviews:198,  category:"smartphones" },
+  ];
+
+  // ── 3. FALLBACK CATEGORIES ────────────────────────────────────
+  const FALLBACK_CATS = [
+    { emoji:"📱", name:"Smartphones",   count:"1,200+" },
+    { emoji:"💻", name:"Laptops",       count:"480+"   },
+    { emoji:"⌚", name:"Smartwatches",  count:"210+"   },
+    { emoji:"🎧", name:"Headphones",    count:"340+"   },
+    { emoji:"📸", name:"Cameras",       count:"180+"   },
+    { emoji:"🎮", name:"Gaming",        count:"120+"   },
+    { emoji:"📺", name:"TVs & Screens", count:"95+"    },
+    { emoji:"🔌", name:"Accessories",   count:"600+"   },
+  ];
+
+  // ── 4. FALLBACK REVIEWS ───────────────────────────────────────
+  const FALLBACK_REVIEWS = [
+    { rating:5, text:"I bought an iPhone 13 for my daughter. The condition was exactly as described — practically brand new. Saved over ₦200,000 compared to buying new. Delivery to Ibadan took just 2 days!", initials:"AO", name:"Adunola Okafor",   city:"Ibadan, Oyo State",   color:"#00A651" },
+    { rating:5, text:"As a tech person, I was sceptical at first. But the MacBook I got was perfect — no scratches, full battery health. Their 12-month warranty gave me confidence. I've now bought 3 devices from them!", initials:"CU", name:"Chukwuemeka Uche", city:"Enugu, Enugu State",  color:"#185FA5" },
+    { rating:4, text:"TechLag.ng is legit! I was tired of buying fake phones in Computer Village. Here everything is transparent. Will definitely recommend to my colleagues.", initials:"FA", name:"Fatima Aliyu",      city:"Kaduna, Kaduna State", color:"#F4A623" },
+  ];
+
+  /* ============================================================
+     ⚙️  SUPABASE LIVE DATA ENGINE
+     Priority order for credentials:
+       1. SUPABASE_URL / SUPABASE_KEY constants above (hardcoded)
+       2. tl_url / tl_key  — saved by the new streamlined admin
+       3. tl_sb_url / tl_sb_key — saved by the full admin (legacy)
+     Falls back to FALLBACK_* arrays if Supabase is unreachable.
+  ============================================================ */
+
+  const _SB_URL = SUPABASE_URL || localStorage.getItem('tl_url') || localStorage.getItem('tl_sb_url') || '';
+  const _SB_KEY = SUPABASE_KEY || localStorage.getItem('tl_key') || localStorage.getItem('tl_sb_key') || '';
+
+  /* ── utils ── */
+  const fmt  = n => '₦' + Number(n).toLocaleString('en-NG');
+  const stars = n => '★'.repeat(+n) + '☆'.repeat(5 - +n);
+  const badgeCls = b => b === 'Like New' ? 'badge-dark' : b === 'Very Good' ? 'badge-green' : b === 'Good' ? 'badge-green' : 'badge-green';
+
+  /* ── skeleton loaders ── */
+  function showSkeletons(gridId, count = 6) {
+    const g = document.getElementById(gridId);
+    if (!g) return;
+    g.innerHTML = Array(count).fill(`
+      <div class="product-card" style="pointer-events:none;">
+        <div class="card-img" style="background:linear-gradient(90deg,#f0ede8 25%,#e8e5e0 50%,#f0ede8 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;"></div>
+        <div class="card-body">
+          <div style="height:10px;width:40%;background:#f0ede8;border-radius:4px;margin-bottom:8px;animation:shimmer 1.4s infinite;background-size:200% 100%;background-image:linear-gradient(90deg,#f0ede8 25%,#e8e5e0 50%,#f0ede8 75%);"></div>
+          <div style="height:14px;width:90%;background:#f0ede8;border-radius:4px;margin-bottom:6px;animation:shimmer 1.4s infinite;background-size:200% 100%;background-image:linear-gradient(90deg,#f0ede8 25%,#e8e5e0 50%,#f0ede8 75%);"></div>
+          <div style="height:10px;width:60%;background:#f0ede8;border-radius:4px;margin-bottom:10px;animation:shimmer 1.4s infinite;background-size:200% 100%;background-image:linear-gradient(90deg,#f0ede8 25%,#e8e5e0 50%,#f0ede8 75%);"></div>
+          <div style="height:18px;width:50%;background:#f0ede8;border-radius:4px;animation:shimmer 1.4s infinite;background-size:200% 100%;background-image:linear-gradient(90deg,#f0ede8 25%,#e8e5e0 50%,#f0ede8 75%);"></div>
+        </div>
+      </div>`).join('');
+  }
+
+  function showReviewSkeletons() {
+    const g = document.getElementById('review-grid');
+    if (!g) return;
+    g.innerHTML = Array(3).fill(`
+      <div class="review-card" style="pointer-events:none;">
+        <div style="height:14px;width:80px;background:#f0ede8;border-radius:4px;margin-bottom:14px;animation:shimmer 1.4s infinite;background-size:200% 100%;background-image:linear-gradient(90deg,#f0ede8 25%,#e8e5e0 50%,#f0ede8 75%);"></div>
+        <div style="height:12px;width:100%;background:#f0ede8;border-radius:4px;margin-bottom:6px;animation:shimmer 1.4s infinite;background-size:200% 100%;background-image:linear-gradient(90deg,#f0ede8 25%,#e8e5e0 50%,#f0ede8 75%);"></div>
+        <div style="height:12px;width:80%;background:#f0ede8;border-radius:4px;margin-bottom:6px;animation:shimmer 1.4s infinite;background-size:200% 100%;background-image:linear-gradient(90deg,#f0ede8 25%,#e8e5e0 50%,#f0ede8 75%);"></div>
+        <div style="height:12px;width:60%;background:#f0ede8;border-radius:4px;margin-bottom:16px;animation:shimmer 1.4s infinite;background-size:200% 100%;background-image:linear-gradient(90deg,#f0ede8 25%,#e8e5e0 50%,#f0ede8 75%);"></div>
+        <div style="display:flex;gap:10px;align-items:center;">
+          <div style="width:36px;height:36px;border-radius:50%;background:#f0ede8;animation:shimmer 1.4s infinite;background-size:200% 100%;background-image:linear-gradient(90deg,#f0ede8 25%,#e8e5e0 50%,#f0ede8 75%);"></div>
+          <div style="height:12px;width:120px;background:#f0ede8;border-radius:4px;animation:shimmer 1.4s infinite;background-size:200% 100%;background-image:linear-gradient(90deg,#f0ede8 25%,#e8e5e0 50%,#f0ede8 75%);"></div>
+        </div>
+      </div>`).join('');
+  }
+
+  /* ── Supabase fetch ── */
+  async function sbFetch(table, params = '') {
+    const res = await fetch(`${_SB_URL}/rest/v1/${table}?${params}`, {
+      headers: { 'apikey': _SB_KEY, 'Authorization': `Bearer ${_SB_KEY}` }
+    });
+    if (!res.ok) throw new Error(`${res.status}`);
+    return res.json();
+  }
+
+  /* ── all loaded products (for filtering) ── */
+  let _ALL_PRODUCTS = [];
+  let _ACTIVE_CAT = '';
+
+  /* ── render products ── */
+  function renderProducts(data) {
+    _ALL_PRODUCTS = data;
+    filterAndRender();
+  }
+
+  function filterAndRender(cat) {
+    if (cat !== undefined) _ACTIVE_CAT = cat;
+    const list = _ACTIVE_CAT
+      ? _ALL_PRODUCTS.filter(p => p.category === _ACTIVE_CAT)
+      : _ALL_PRODUCTS;
+    const grid = document.getElementById('product-grid');
+    if (!grid) return;
+    if (!list.length) {
+      grid.innerHTML = `<div style="grid-column:1/-1;text-align:center;padding:48px 20px;color:var(--text-light);">
+        <div style="font-size:40px;margin-bottom:12px;">📦</div>
+        <p>No products in this category yet.</p>
+      </div>`;
+      return;
+    }
+    grid.innerHTML = list.map(p => {
+      const disc = p.discount || (p.old_price > 0 && p.old_price > p.price
+        ? `-${Math.round((1 - p.price / p.old_price) * 100)}%` : '');
+      return `
+      <div class="product-card" data-cat="${p.category || ''}">
+        <div class="card-img">${p.emoji || '📱'}
+          <div class="card-badges">
+            <span class="badge badge-green">${p.badge}</span>
+            ${disc ? `<span class="badge badge-gold">${disc}</span>` : ''}
+          </div>
+          <div class="wishlist-btn">♡</div>
+        </div>
+        <div class="card-body">
+          <div class="card-brand">${p.brand}</div>
+          <div class="card-name">${p.name}</div>
+          <div class="card-condition">✦ ${p.badge} Condition</div>
+          <div class="card-stars">${stars(p.rating)} <span>(${Number(p.reviews || 0).toLocaleString()} reviews)</span></div>
+          <div class="card-price-row">
+            <div>
+              <span class="card-price naira">${fmt(p.price)}</span>
+              ${p.old_price ? `<span class="card-old naira">${fmt(p.old_price)}</span>` : ''}
+            </div>
+            <button class="card-add">+</button>
+          </div>
+        </div>
+      </div>`;
+    }).join('');
+    bindCardEvents();
+  }
+
+  /* ── render categories ── */
+  function renderCategories(data) {
+    const grid = document.getElementById('cat-grid');
+    if (!grid || !data || !data.length) return;
+    grid.innerHTML = data.map(c => `
+      <div class="cat-card" onclick="filterByCategory('${c.name.toLowerCase()}')">
+        <span class="cat-icon">${c.emoji}</span>
+        <div class="cat-name">${c.name}</div>
+        <div class="cat-count">${c.count} products</div>
+      </div>`).join('');
+  }
+
+  /* ── render reviews ── */
+  function renderReviews(data) {
+    const grid = document.getElementById('review-grid');
+    if (!grid || !data || !data.length) return;
+    grid.innerHTML = data.map(r => `
+      <div class="review-card">
+        <div class="review-stars">${stars(r.rating)}</div>
+        <div class="review-text">"${r.text}"</div>
+        <div class="review-user">
+          <div class="review-avatar" style="background:${r.color || '#00A651'};">${r.initials || '??'}</div>
+          <div>
+            <div class="review-name">${r.name}</div>
+            <div class="review-city">📍 ${r.city || ''}</div>
+          </div>
+        </div>
+      </div>`).join('');
+  }
+
+  /* ── category nav filter ── */
+  function filterByCategory(catName) {
+    // Map display name → db category slug
+    const MAP = {
+      'smartphones':'smartphones','laptops':'laptops','smartwatches':'smartwatches',
+      'headphones':'audio','cameras':'cameras','gaming':'gaming',
+      'tvs & screens':'tvs','accessories':'accessories'
+    };
+    const slug = MAP[catName.toLowerCase()] || catName.toLowerCase();
+    filterAndRender(slug);
+    // scroll to products
+    document.getElementById('product-grid')?.scrollIntoView({ behavior:'smooth', block:'start' });
+  }
+
+  /* ── top category nav clicks ── */
+  document.querySelectorAll('.cat-item').forEach(el => {
+    el.addEventListener('click', function() {
+      document.querySelectorAll('.cat-item').forEach(c => c.classList.remove('active'));
+      this.classList.add('active');
+      const txt = this.textContent.trim().replace(/^[^\w]+/, '').toLowerCase();
+      if (txt === 'all') { filterAndRender(''); }
+      else { filterByCategory(txt); }
+    });
+  });
+
+  /* ── cart & wishlist interactions ── */
+  function bindCardEvents() {
+    document.querySelectorAll('.wishlist-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        this.textContent = this.textContent === '♡' ? '❤️' : '♡';
+      });
+    });
+    document.querySelectorAll('.card-add, .add-btn').forEach(btn => {
+      btn.addEventListener('click', function(e) {
+        e.stopPropagation();
+        const badge = document.querySelector('.cart-badge');
+        if (badge) badge.textContent = parseInt(badge.textContent) + 1;
+        this.textContent = '✓';
+        this.style.background = '#007A3D';
+        setTimeout(() => { this.textContent = '+'; this.style.background = ''; }, 1500);
+      });
+    });
+  }
+
+  /* ── live data indicator ── */
+  function showLiveBadge() {
+    const banner = document.querySelector('.top-banner');
+    if (!banner) return;
+    const pill = document.createElement('span');
+    pill.style.cssText = 'display:inline-flex;align-items:center;gap:4px;background:rgba(255,255,255,0.2);border-radius:20px;padding:2px 10px;font-size:11px;font-weight:700;margin-left:14px;';
+    pill.innerHTML = '<span style="width:6px;height:6px;border-radius:50%;background:#fff;display:inline-block;animation:pulse2 2s infinite;"></span> LIVE';
+    banner.appendChild(pill);
+  }
+
+  /* ── INIT ── */
+  (async () => {
+    // Show skeletons immediately while fetching
+    showSkeletons('product-grid', 6);
+    showReviewSkeletons();
+
+    if (_SB_URL && _SB_KEY) {
+      try {
+        const [products, categories, reviews] = await Promise.all([
+          sbFetch('products', 'active=eq.true&order=created_at.desc'),
+          sbFetch('categories', 'order=sort_order.asc'),
+          sbFetch('reviews', 'approved=eq.true&order=created_at.desc&limit=6'),
+        ]);
+        renderProducts(products);
+        renderCategories(categories);
+        renderReviews(reviews);
+        showLiveBadge();
+        console.log(`%c✅ TechLag.ng — Live data from Supabase (${products.length} products, ${reviews.length} reviews)`, 'color:#00A651;font-weight:bold;');
+        return;
+      } catch(e) {
+        console.warn('⚠️ Supabase unreachable, showing fallback data.', e.message);
+      }
+    } else {
+      console.info('ℹ️ No Supabase credentials found — showing fallback data. Open the admin to connect.');
+    }
+
+    // Fallback
+    renderProducts(FALLBACK_PRODUCTS);
+    renderCategories(FALLBACK_CATS);
+    renderReviews(FALLBACK_REVIEWS);
+  })();
+
+</script>
+<style>
+  @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+  @keyframes pulse2  { 0%,100%{opacity:1} 50%{opacity:.3} }
+</style>
+</body>
+</html>
